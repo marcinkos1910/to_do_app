@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # local
     "user.apps.UserConfig",
+    "todo.apps.TodoConfig",
     # 3rd party
 ]
 
