@@ -16,14 +16,42 @@
 <!--    # token that identifies user (by cookies)-->
     {{ form.as_p }}
 <!--    # display as separate paragraphs-->
-    <button type="submit">Dodaj</button>
-
+    <button type="submit">Add task</button>
 </form>
+    <form action="{% url 'todo:filter' 'all' %}" method="get">
+        {% csrf_token %}
+        <button type="submit">Show all tasks</button>
+    </form>
+
+        <form action="{% url 'todo:filter' 'done' %}" method="get">
+        {% csrf_token %}
+        <button type="submit">Show done tasks</button>
+    </form>
+
+        <form action="{% url 'todo:filter' 'ongoing' %}" method="get">
+        {% csrf_token %}
+        <button type="submit">Show ongoing tasks</button>
+    </form>
+
+
+
+<h2>Ongoing tasks</h2>
+
 <ul>
     {% for task in task_list %}
 
     <li>
     {{ task }}
+        <form action="{% url 'todo:delete' task.pk %}" method="get">
+            {% csrf_token %}
+            <button type="submit">Delete task</button>
+        </form>
+<!--        <a href="{% url 'todo:delete' task.pk %}" >Delete task</a>-->
+        <form action="{% url 'todo:done' task.pk %}" method="post">
+            {% csrf_token %}
+<!--            <a href="{% url 'todo:done' task.pk %}">Task done</a>-->
+            <button type="submit" >Task done</button>
+        </form>
     </li>
 
     {% endfor %}
